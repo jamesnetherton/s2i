@@ -47,6 +47,11 @@ if [ -z "${KARAF_OPTS}" ]; then
   export KARAF_OPTS
 fi
 
+# Ensure logs are output to STDOUT
+if [[ ! "${KARAF_OPTS}" =~ .*-Dkaraf.log.console=.* ]]; then
+  export KARAF_OPTS="${KARAF_OPTS} -Dkaraf.log.console=INFO"
+fi
+
 # force karaf to exec java process so docker runs a single process with PID 1
 export KARAF_EXEC=exec
 
